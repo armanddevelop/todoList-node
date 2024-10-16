@@ -9,16 +9,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const messages_1 = require("./helpers/messages");
 require("colors");
-console.clear();
+const Inquirer_1 = require("./helpers/Inquirer");
+const tasks_1 = require("./models/tasks");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
-    let option = "";
+    let opt = 0;
+    const tasks = new tasks_1.Tasks();
     do {
-        option = yield (0, messages_1.showMenu)();
-        if (option !== "0")
-            yield (0, messages_1.pause)();
-    } while (option !== "0");
+        const option = yield (0, Inquirer_1.inquirerMenu)();
+        opt = option;
+        switch (opt) {
+            case 1:
+                const description = yield (0, Inquirer_1.readInput)("Task Description: ");
+                tasks.createTask(description);
+                break;
+            case 2:
+                console.log("task._list ", tasks._list);
+            default:
+                break;
+        }
+        if (opt !== 0)
+            yield (0, Inquirer_1.inquirerPause)();
+    } while (opt !== 0);
 });
 main();
 //# sourceMappingURL=app.js.map
