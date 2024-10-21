@@ -4,7 +4,7 @@ import "colors";
 export const inquirerMenu = async () => {
   //console.clear();
   console.log("===================".green);
-  console.log("SELECT A OPTION".green);
+  console.log("SELECT A OPTION".white);
   console.log("===================\n".green);
   const { option } = await inquirer.prompt([
     {
@@ -14,31 +14,31 @@ export const inquirerMenu = async () => {
       choices: [
         {
           value: 1,
-          name: "1.- Create Task",
+          name: `${"1.-".green} Create Task`,
         },
         {
           value: 2,
-          name: "2.- List of tasks",
+          name: `${"2.-".green} List of Task`,
         },
         {
           value: 3,
-          name: "3.- Completed tasks ",
+          name: `${"3.-".green} Completed Task`,
         },
         {
           value: 4,
-          name: "4.- Pending Tasks",
+          name: `${"4.-".green} Pending Tasks`,
         },
         {
           value: 5,
-          name: "5.- Complete task",
+          name: `${"5.-".green} Completed Task`,
         },
         {
           value: 6,
-          name: "6.- Delete task",
+          name: `${"6.-".red} Delete Task`,
         },
         {
           value: 0,
-          name: "0.- Exit",
+          name: `${"0.-".green} Exit`,
         },
       ],
     },

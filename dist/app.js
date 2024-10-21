@@ -12,9 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require("colors");
 const Inquirer_1 = require("./helpers/Inquirer");
 const tasks_1 = require("./models/tasks");
+const saveFile_1 = require("./helpers/saveFile");
 const main = () => __awaiter(void 0, void 0, void 0, function* () {
     let opt = 0;
     const tasks = new tasks_1.Tasks();
+    const tasksDB = (0, saveFile_1.readDB)();
+    if (tasksDB) {
+        tasks.loadTasks(tasksDB);
+    }
     do {
         const option = yield (0, Inquirer_1.inquirerMenu)();
         opt = option;
@@ -24,10 +29,13 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
                 tasks.createTask(description);
                 break;
             case 2:
-                console.log("task._list ", tasks._list);
+                //console.log("task._list ", tasks.tasksList);
+                tasks.allTasks(tasks.tasksList);
+                break;
             default:
                 break;
         }
+        yield (0, saveFile_1.saveDB)(tasks.tasksList);
         if (opt !== 0)
             yield (0, Inquirer_1.inquirerPause)();
     } while (opt !== 0);

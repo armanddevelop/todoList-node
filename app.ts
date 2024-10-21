@@ -1,10 +1,16 @@
 import "colors";
 import { inquirerMenu, inquirerPause, readInput } from "./helpers/Inquirer";
 import { Tasks } from "./models/tasks";
+import { saveDB, readDB } from "./helpers/saveFile";
 
 const main = async () => {
   let opt = 0;
   const tasks = new Tasks();
+  const tasksDB = readDB();
+  if (tasksDB) {
+    tasks.loadTasks(tasksDB);
+  }
+
   do {
     const option = await inquirerMenu();
     opt = option;
@@ -14,10 +20,13 @@ const main = async () => {
         tasks.createTask(description);
         break;
       case 2:
-        console.log("task._list ", tasks._list);
+        tasks.allTasks(tasks.tasksList);
+
+        break;
       default:
         break;
     }
+    await saveDB(tasks.tasksList);
     if (opt !== 0) await inquirerPause();
   } while (opt !== 0);
 };
