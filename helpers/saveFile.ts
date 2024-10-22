@@ -2,7 +2,7 @@ import { existsSync, readFileSync, writeFileSync } from "fs";
 interface IData {
   description: string;
   id: string;
-  completedAt: Date | null;
+  completedAt: string | null;
 }
 const path = "./db/data.json";
 export const saveDB = async (data: Array<IData>) => {

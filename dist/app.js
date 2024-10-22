@@ -29,8 +29,25 @@ const main = () => __awaiter(void 0, void 0, void 0, function* () {
                 tasks.createTask(description);
                 break;
             case 2:
-                //console.log("task._list ", tasks.tasksList);
-                tasks.allTasks(tasks.tasksList);
+                tasks.allTasks();
+                break;
+            case 3:
+                tasks.manageTasksCompleted();
+                break;
+            case 4:
+                tasks.manageTasksCompleted(false);
+                break;
+            case 5:
+                const ids = yield (0, Inquirer_1.checkListTask)(tasks.tasksList);
+                tasks.toogleCompleteTasks(ids);
+                break;
+            case 6:
+                const id = yield (0, Inquirer_1.listTasksToDelete)(tasks.tasksList);
+                const ok = yield (0, Inquirer_1.confirm)("Are you sure to Delete the task?");
+                if (id !== "0" && ok) {
+                    tasks.deleteTask(id);
+                    console.log("task delete successfully".green);
+                }
                 break;
             default:
                 break;

@@ -22,7 +22,7 @@ export const inquirerMenu = async () => {
         },
         {
           value: 3,
-          name: `${"3.-".green} Completed Task`,
+          name: `${"3.-".green} List of Completed Task`,
         },
         {
           value: 4,
@@ -30,7 +30,7 @@ export const inquirerMenu = async () => {
         },
         {
           value: 5,
-          name: `${"5.-".green} Completed Task`,
+          name: `${"5.-".green} Complete Task(s)`,
         },
         {
           value: 6,
@@ -70,4 +70,50 @@ export const readInput = async (message: string): Promise<string> => {
     },
   ]);
   return description;
+};
+
+export const listTasksToDelete = async (tasks = []): Promise<string> => {
+  const choices = tasks.map((task, idx) => ({
+    value: task.id,
+    name: `${(idx + 1 + ".").toString().green} ${task.description}`,
+  }));
+  choices.unshift({ value: "0", name: "0.".green + " Cancel" });
+  const { id } = await inquirer.prompt([
+    {
+      type: "list",
+      name: "id",
+      message: "Which taks would you like to delete?",
+      choices,
+    },
+  ]);
+  return id;
+};
+
+export const checkListTask = async (tasks = []): Promise<Array<string>> => {
+  const choices = tasks.map((task) => ({
+    value: task.id,
+    name: `${task.description}`,
+    checked: task.completedAt ? true : false,
+  }));
+  const { ids } = await inquirer.prompt([
+    {
+      type: "checkbox",
+      name: "ids",
+      message: "Select which taks would you like to complete?",
+      choices,
+    },
+  ]);
+  return ids;
+};
+
+export const confirm = async (message: string) => {
+  const { ok } = await inquirer.prompt([
+    {
+      type: "confirm",
+      name: "ok",
+      message,
+    },
+  ]);
+
+  return ok;
 };
