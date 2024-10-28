@@ -15,3 +15,6 @@ npm i
 node app.js
 ```
 to run the applicacion
+
+You will see the follow menu, you can interact in it, using 
+![image](https://github.com/user-attachments/assets/da4c4bc6-51ee-45ab-8862-52a4b189b16b)
