@@ -3,6 +3,8 @@
 
 To run this app follow the stpes:
 
-1.- install node modules using ```bash npm i command```
+1.- install node modules using ```bash 
+npm i command
+```
 2.- use in this path 04-todoList the follow command node tsx, to 
 3.- using the terminal go to dist folder and inside there use node app.js to run the applicacion
